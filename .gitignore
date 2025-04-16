@@ -1,0 +1,14 @@
+# Virtual environments
+venv/
+.venv/
+
+
+# Data Files
+*.csv
+*.pkl
+
+
+# Python cache
+__pycache__/
+*.py[cod]
+
