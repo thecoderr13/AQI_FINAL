@@ -5,7 +5,7 @@ venv/
 
 # Data Files
 *.csv
-*.pkl
+
 
 
 # Python cache
