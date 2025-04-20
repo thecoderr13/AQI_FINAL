@@ -66,3 +66,6 @@ The **AQI Prediction Dashboard** is a Streamlit-based web application designed t
 
 ### Deployment
 The app is deployed on Streamlit Community Cloud.
+
+![Flowchart1](images\AQI.png)
+
