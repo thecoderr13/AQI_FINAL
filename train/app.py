@@ -30,7 +30,6 @@ df = pd.read_csv('training_dataset.csv')  # Ensure this file exists and contains
 mean_values = df[['PM2.5', 'PM10', 'NO', 'NO2', 'NH3', 'CO', 'SO2', 'O3']].mean().to_dict()
 
 # OpenWeather API configuration
-
 BASE_URL = "http://api.openweathermap.org/data/2.5/air_pollution"
 
 # City coordinates
@@ -129,8 +128,8 @@ st.markdown(
         backdrop-filter: blur(10px);
         border-radius: 15px;
         padding: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        border: 2px solid rgba(0, 196, 180, 0.5); /* Teal border */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         color: white;
         margin-bottom: 20px;
     }
@@ -141,27 +140,28 @@ st.markdown(
         color: transparent;
     }
     .pollutant-card {
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark blue gradient */
         border-radius: 10px;
         padding: 15px;
-        margin: 10px; /* Added spacing between cards */
+        margin: 0 20px 15px 20px; /* Increased horizontal spacing to 20px */
         text-align: center;
-        border-left: 4px solid #00C4B4;
+        border: 2px solid #00C4B4; /* Teal border */
         display: inline-block;
         width: 180px;
         height: 120px;
         vertical-align: middle;
-        transition: transform 0.2s;
+        transition: transform 0.2s, box-shadow 0.2s;
         color: white;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
     .pollutant-card:hover {
         transform: scale(1.05);
+        box-shadow: 0 6px 18px rgba(0, 196, 180, 0.5);
     }
     .pollutant-card i {
         font-size: 24px;
         margin-bottom: 5px;
-        color: #00C4B4;
+        color: #00C4B4; /* Teal icon color */
     }
     .stButton>button {
         background: linear-gradient(135deg, #2c3e50, #3498db); /* Darker blue gradient */
@@ -179,6 +179,12 @@ st.markdown(
     .stButton>button:hover {
         transform: scale(1.05);
         background: linear-gradient(135deg, #3498db, #2c3e50); /* Reversed gradient on hover */
+        color: white; /* White text on hover */
+        font-weight: bold; /* Bold text on hover */
+    }
+    .stButton>button:active {
+        color: white; /* White text on click */
+        font-weight: bold; /* Bold text on click */
     }
     .input-group {
         background: linear-gradient(135deg, #1e3c72, #2a5298); /* Matching pollutant card gradient */
@@ -186,7 +192,7 @@ st.markdown(
         border-radius: 10px;
         padding: 15px;
         margin-bottom: 15px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         color: white;
     }
     .input-group label {
@@ -194,17 +200,23 @@ st.markdown(
         font-weight: bold;
     }
     .stNumberInput input {
-        background: rgba(255, 255, 255, 0.1); /* Light glass effect for input fields */
-        border: 1px solid #00C4B4; /* Teal border */
+        background: rgba(255, 255, 255, 0.1); /* Light glass effect */
+        border: 2px solid #00C4B4; /* Thicker teal border */
         border-radius: 5px;
         color: white;
-        padding: 5px;
+        padding: 8px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .stNumberInput input:focus {
+        border-color: #4ecdc4; /* Lighter teal on focus */
+        box-shadow: 0 0 8px rgba(0, 196, 180, 0.5);
+        outline: none;
     }
     @media (max-width: 768px) {
         .pollutant-card {
             width: 140px;
             height: 100px;
-            margin: 5px;
+            margin: 0 10px 10px 10px; /* Adjusted spacing for mobile */
         }
         .stButton>button {
             padding: 8px 15px;
