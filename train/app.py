@@ -11,11 +11,15 @@ load_dotenv()  # This loads variables from .env file
 
 API_KEY = os.getenv("API_KEY")  # Make sure the variable name matches exactly
 
-# Load pre-trained models
-rf_model = joblib.load('../trained_models/random_forest_model.pkl')
-xgb_model = joblib.load('../trained_models/xgboost_model.pkl')
-poly_model = joblib.load('../trained_models/polynomial_regression_model.pkl')
-linear_model = joblib.load('../trained_models/linear_regression_model.pkl')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+rf_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/random_forest_model.pkl'))
+xgb_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/xgboost_model.pkl'))
+poly_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/polynomial_regression_model.pkl'))
+linear_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/linear_regression_model.pkl'))
+
+print("Current Working Directory:", os.getcwd())
+print("Listing parent directory:", os.listdir('..'))
+print("Listing trained_models:", os.listdir('../trained_models/'))
 
 # Define model options at the top
 model_options = {
