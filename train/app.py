@@ -11,25 +11,26 @@ load_dotenv()  # This loads variables from .env file
 
 API_KEY = os.getenv("API_KEY")  # Make sure the variable name matches exactly
 
-
+# Get the directory where the script is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print("Script Directory:", BASE_DIR)
-print("Listing trained_models:", os.listdir(os.path.join(BASE_DIR, '../trained_models/')))
-rf_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/random_forest_model.pkl'))
-xgb_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/xgboost_model.pkl'))
-poly_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/polynomial_regression_model.pkl'))
-linear_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/linear_regression_model.pkl'))
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Verify and list trained_models directory using BASE_DIR
 trained_models_path = os.path.join(BASE_DIR, '../trained_models/')
 if os.path.exists(trained_models_path):
     print("trained_models found:", os.listdir(trained_models_path))
 else:
     print("trained_models directory not found at:", trained_models_path)
 
+# Load models using the verified path
+rf_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/random_forest_model.pkl'))
+xgb_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/xgboost_model.pkl'))
+poly_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/polynomial_regression_model.pkl'))
+linear_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/linear_regression_model.pkl'))
+
 print("Current Working Directory:", os.getcwd())
 print("Listing parent directory:", os.listdir('..'))
-print("Listing trained_models:", os.listdir('../trained_models/'))
+# Removed the erroneous os.listdir('../trained_models/') call to avoid FileNotFoundError
 
 # Define model options at the top
 model_options = {
@@ -40,7 +41,7 @@ model_options = {
 }
 
 # Load dataset to calculate mean values and additional data (replace with your dataset path)
-df = pd.read_csv('training_dataset.csv')  # Ensure this file exists and contains the features
+df = pd.read_csv(os.path.join(BASE_DIR, 'training_dataset.csv'))  # Ensure this file exists and contains the features
 mean_values = df[['PM2.5', 'PM10', 'NO', 'NO2', 'NH3', 'CO', 'SO2', 'O3']].mean().to_dict()
 
 # OpenWeather API configuration
@@ -346,5 +347,3 @@ if st.button("Predict AQI"):
         st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.error("Please fill all fields and fetch or enter pollutant data.")
-
-# Run with: streamlit run your_script.py
