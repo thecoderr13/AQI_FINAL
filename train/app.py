@@ -11,11 +11,21 @@ load_dotenv()  # This loads variables from .env file
 
 API_KEY = os.getenv("API_KEY")  # Make sure the variable name matches exactly
 
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+print("Script Directory:", BASE_DIR)
+print("Listing trained_models:", os.listdir(os.path.join(BASE_DIR, '../trained_models/')))
 rf_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/random_forest_model.pkl'))
 xgb_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/xgboost_model.pkl'))
 poly_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/polynomial_regression_model.pkl'))
 linear_model = joblib.load(os.path.join(BASE_DIR, '../trained_models/linear_regression_model.pkl'))
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+trained_models_path = os.path.join(BASE_DIR, '../trained_models/')
+if os.path.exists(trained_models_path):
+    print("trained_models found:", os.listdir(trained_models_path))
+else:
+    print("trained_models directory not found at:", trained_models_path)
 
 print("Current Working Directory:", os.getcwd())
 print("Listing parent directory:", os.listdir('..'))
